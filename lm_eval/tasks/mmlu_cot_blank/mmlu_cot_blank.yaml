@@ -1,13 +1,29 @@
+tag: "mmlu_cot_blank"
 dataset_name: mmlu_cot_blank
-dataset_path: "hails/mmlu_no_train"
-subset: "abstract_algebra", "anatomy", "astronomy", "biology", "chemistry",
-        # 计算机与工程
-        "college_computer_science", "computer_security", "engineering",
-        # 数学与物理
-        "college_mathematics", "college_physics", "conceptual_physics", "linear_algebra", "physics",
-        # 医学与健康
-        "college_medicine", "clinical_knowledge", "health_science",
-        "high_school_biology", "high_school_chemistry", "high_school_physics"
+dataset_path: hails/mmlu_no_train  # 修复点：冒号后添加空格，路径无需引号（无特殊字符时）
+subset:
+  - "abstract_algebra"
+  - "anatomy"
+  - "astronomy"
+  - "biology"
+  - "chemistry"
+  # 计算机与工程
+  - "college_computer_science"
+  - "computer_security"
+  - "engineering"
+  # 数学与物理
+  - "college_mathematics"
+  - "college_physics"
+  - "conceptual_physics"
+  - "linear_algebra"
+  - "physics"
+  # 医学与健康
+  - "college_medicine"
+  - "clinical_knowledge"
+  - "health_science"
+  - "high_school_biology"
+  - "high_school_chemistry"
+  - "high_school_physics"
 validation_split: validation
 fewshot_split: dev
 process_docs: !function utils.process_docs
@@ -35,15 +51,22 @@ generation_kwargs:
     - "<|im_end|>"
   do_sample: false
   temperature: 0.0
-num_fewshot: 0  # 零样本设置不变
+  max_new_tokens: 512
+num_fewshot: 0
 metric_list:
   - metric: exact_match
     aggregation: mean
     higher_is_better: true
-    ignore_case: true 
-    ignore_punctuation: true  
+    ignore_case: true
+    ignore_punctuation: true
+  - metric: partial_match
+    aggregation: mean
+    higher_is_better: true
+    ignore_case: true
+    ignore_punctuation: true
 metadata:
   version: 1.0
+  description: "MMLU variant with blank-filling questions requiring chain-of-thought reasoning"
 dataset_kwargs:
   trust_remote_code: true
 

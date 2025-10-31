@@ -1,6 +1,6 @@
 tag: "mmlu_cot_blank"
 dataset_name: mmlu_cot_blank
-dataset_path: hails/mmlu_no_train  # 修复点：冒号后添加空格，路径无需引号（无特殊字符时）
+dataset_path: hails/mmlu_no_train
 subset:
   - "abstract_algebra"
   - "anatomy"
@@ -69,4 +69,5 @@ metadata:
   description: "MMLU variant with blank-filling questions requiring chain-of-thought reasoning"
 dataset_kwargs:
   trust_remote_code: true
+    
 
